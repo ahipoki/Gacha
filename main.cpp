@@ -4,398 +4,88 @@
 #include <stdlib.h>
 #include <time.h>
 #include "Item.h"
+#include "Room.h"
+#include "Roll.h"
 
 using namespace std;
 
-void getSSR();
-void getSR();
-void getR();
-void get5CE();
-void get4CE();
-void get3CE();
+void strupper(char* str);
+int wordLength(char*, int start);
+Room* createRooms(vector<Room*> &rooms, vector<Unit*> &units);
 
 int main() 
 {
   srand (time(NULL));
-  int roll = rand()%100 + 1;
-  cout << "Roll: " << roll << endl;
-  if (roll == 1)
+  vector<Unit*> units;
+  vector<Room*> cleanRooms;
+  vector<Unit*> cleanUnits;
+  Room* currentRoom = createRooms(cleanRooms, cleanUnits);
+  bool playing = true;
+  int FP = 0;
+  //Friend points
+  int SQ = 0;
+  //Saint Quartz
+  int PSQ = 0;
+  //Paid Saint Quartz
+  char input[80];
+  cout << "Enter a command" << endl;
+  while (playing == true)
   {
-    getSSR();
-  }
-  else if (roll > 1 && roll <= 5)
-  {
-    cout << "5* CE" << endl;
-    get5CE();
-  }
-  else if (roll > 5 && roll <= 8)
-  {
-    cout << "SR Servant" << endl;
-    getSR();
-  }
-  else if (roll > 8 && roll <= 20)
-  {
-    cout << "4* CE" << endl;
-    get4CE();
-  }
-  else if (roll > 20 && roll <= 60)
-  {
-    cout << "3* Servant" << endl;
-    getR();
-  }
-  else
-  {
-    cout << "3* CE" << endl;
-    get3CE();
-  }
-  
-  return 0;
-}
+    while (cin.peek() == '\n')
+    {
+      cin.ignore();
+    }
+    cin.get(input, 100, '\n');
 
-void getSSR()
-{
-  int unit = rand()%13+1;
-  char* unitClass;
-  if (unit == 1)
-  {
-    cout << "Class: Saber" << endl;
-  }
-  else if (unit == 2)
-  {
-    cout << "Class: Archer" << endl;
-  }
-  else if (unit == 3)
-  {
-    cout << "Class: Lancer" << endl;
-  }
-  else if (unit == 4)
-  {
-    cout << "Class: Rider" << endl;
-  }
-  else if (unit == 5)
-  {
-    cout << "Class: Caster" << endl;
-  }
-  else if (unit == 6)
-  {
-    cout << "Class: Assassin" << endl;
-  }
-  else if (unit == 7)
-  {
-    cout << "Class: Berserker" << endl;
-  }
-  else if (unit == 8)
-  {
-    cout << "Class: Shielder" << endl;
-  }
-  else if (unit == 9)
-  {
-    cout << "Class: Ruler" << endl;
-  }
-  else if (unit == 10)
-  {
-    cout << "Class: Avenger" << endl;
-  }
-  else if (unit == 11)
-  {
-    cout << "Class: Moon Cancer" << endl;
-  }
-  else if (unit == 12)
-  {
-    cout << "Class: Alter Ego" << endl;
-  }
-  else
-  {
-    cout << "Class: Foreigner" << endl;
+    int commandLength = wordLength(input, 0);
+    char* command = new char[commandLength + 1];
+    command[commandLength] = '\0';
+    strncpy(command, input, commandLength);
+    strupper(command);
+
+    if (strcmp(command, "QUIT") == 0)
+    {
+      playing = false;
+    }
+    else if (strcmp(command, "ROLL") == 0)
+    {
+      Roll* roll = new Roll();
+      //cout << "Roll" << endl;
+      //roll->checkResult();
+    }
   }
 }
 
-void getSR()
+void strupper(char* str)
 {
-  int unit = rand()%13+1;
-  char* unitClass;
-  if (unit == 1)
+  int length = strlen(str);
+  for (int i = 0; i < length; i++)
   {
-    cout << "Class: Saber" << endl;
-  }
-  else if (unit == 2)
-  {
-    cout << "Class: Archer" << endl;
-  }
-  else if (unit == 3)
-  {
-    cout << "Class: Lancer" << endl;
-  }
-  else if (unit == 4)
-  {
-    cout << "Class: Rider" << endl;
-  }
-  else if (unit == 5)
-  {
-    cout << "Class: Caster" << endl;
-  }
-  else if (unit == 6)
-  {
-    cout << "Class: Assassin" << endl;
-  }
-  else if (unit == 7)
-  {
-    cout << "Class: Berserker" << endl;
-  }
-  else if (unit == 8)
-  {
-    cout << "Class: Shielder" << endl;
-  }
-  else if (unit == 9)
-  {
-    cout << "Class: Ruler" << endl;
-  }
-  else if (unit == 10)
-  {
-    cout << "Class: Avenger" << endl;
-  }
-  else if (unit == 11)
-  {
-    cout << "Class: Moon Cancer" << endl;
-  }
-  else if (unit == 12)
-  {
-    cout << "Class: Alter Ego" << endl;
-  }
-  else
-  {
-    cout << "Class: Foreigner" << endl;
+    str[i] = toupper(str[i]);
   }
 }
 
-void getR()
+Room* createRooms(vector<Room*> &rooms, vector<Unit*> &units)
 {
-  int unit = rand()%13+1;
-  char* unitClass;
-  if (unit == 1)
-  {
-    cout << "Class: Saber" << endl;
-  }
-  else if (unit == 2)
-  {
-    cout << "Class: Archer" << endl;
-  }
-  else if (unit == 3)
-  {
-    cout << "Class: Lancer" << endl;
-  }
-  else if (unit == 4)
-  {
-    cout << "Class: Rider" << endl;
-  }
-  else if (unit == 5)
-  {
-    cout << "Class: Caster" << endl;
-  }
-  else if (unit == 6)
-  {
-    cout << "Class: Assassin" << endl;
-  }
-  else if (unit == 7)
-  {
-    cout << "Class: Berserker" << endl;
-  }
-  else if (unit == 8)
-  {
-    cout << "Class: Shielder" << endl;
-  }
-  else if (unit == 9)
-  {
-    cout << "Class: Ruler" << endl;
-  }
-  else if (unit == 10)
-  {
-    cout << "Class: Avenger" << endl;
-  }
-  else if (unit == 11)
-  {
-    cout << "Class: Moon Cancer" << endl;
-  }
-  else if (unit == 12)
-  {
-    cout << "Class: Alter Ego" << endl;
-  }
-  else
-  {
-    cout << "Class: Foreigner" << endl;
-  }
+  Room* battle = new Room();
+  battle->init("Battle Stage", "The battle screen");
+  rooms.push_back(battle);
+
+  Unit* hokusai = new Unit();
+  hokusai->init("Katsushika Hokusai", "Best Girl");
+  battle->units.push_back(hokusai);
+  units.push_back(hokusai);
+
+  return battle;
 }
 
-void get5CE()
+int wordLength(char* array, int start)
 {
-  int unit = rand()%13+1;
-  char* unitClass;
-  if (unit == 1)
+  int index = start;
+  int length = strlen(array);
+  while (index < length && array[index] != ' ')
   {
-    cout << "Class: Saber" << endl;
+    index++;
   }
-  else if (unit == 2)
-  {
-    cout << "Class: Archer" << endl;
-  }
-  else if (unit == 3)
-  {
-    cout << "Class: Lancer" << endl;
-  }
-  else if (unit == 4)
-  {
-    cout << "Class: Rider" << endl;
-  }
-  else if (unit == 5)
-  {
-    cout << "Class: Caster" << endl;
-  }
-  else if (unit == 6)
-  {
-    cout << "Class: Assassin" << endl;
-  }
-  else if (unit == 7)
-  {
-    cout << "Class: Berserker" << endl;
-  }
-  else if (unit == 8)
-  {
-    cout << "Class: Shielder" << endl;
-  }
-  else if (unit == 9)
-  {
-    cout << "Class: Ruler" << endl;
-  }
-  else if (unit == 10)
-  {
-    cout << "Class: Avenger" << endl;
-  }
-  else if (unit == 11)
-  {
-    cout << "Class: Moon Cancer" << endl;
-  }
-  else if (unit == 12)
-  {
-    cout << "Class: Alter Ego" << endl;
-  }
-  else
-  {
-    cout << "Class: Foreigner" << endl;
-  }
-}
-
-void get4CE()
-{
-  int unit = rand()%13+1;
-  char* unitClass;
-  if (unit == 1)
-  {
-    cout << "Class: Saber" << endl;
-  }
-  else if (unit == 2)
-  {
-    cout << "Class: Archer" << endl;
-  }
-  else if (unit == 3)
-  {
-    cout << "Class: Lancer" << endl;
-  }
-  else if (unit == 4)
-  {
-    cout << "Class: Rider" << endl;
-  }
-  else if (unit == 5)
-  {
-    cout << "Class: Caster" << endl;
-  }
-  else if (unit == 6)
-  {
-    cout << "Class: Assassin" << endl;
-  }
-  else if (unit == 7)
-  {
-    cout << "Class: Berserker" << endl;
-  }
-  else if (unit == 8)
-  {
-    cout << "Class: Shielder" << endl;
-  }
-  else if (unit == 9)
-  {
-    cout << "Class: Ruler" << endl;
-  }
-  else if (unit == 10)
-  {
-    cout << "Class: Avenger" << endl;
-  }
-  else if (unit == 11)
-  {
-    cout << "Class: Moon Cancer" << endl;
-  }
-  else if (unit == 12)
-  {
-    cout << "Class: Alter Ego" << endl;
-  }
-  else
-  {
-    cout << "Class: Foreigner" << endl;
-  }
-}
-
-void get3CE()
-{
-  int unit = rand()%13+1;
-  char* unitClass;
-  if (unit == 1)
-  {
-    cout << "Class: Saber" << endl;
-  }
-  else if (unit == 2)
-  {
-    cout << "Class: Archer" << endl;
-  }
-  else if (unit == 3)
-  {
-    cout << "Class: Lancer" << endl;
-  }
-  else if (unit == 4)
-  {
-    cout << "Class: Rider" << endl;
-  }
-  else if (unit == 5)
-  {
-    cout << "Class: Caster" << endl;
-  }
-  else if (unit == 6)
-  {
-    cout << "Class: Assassin" << endl;
-  }
-  else if (unit == 7)
-  {
-    cout << "Class: Berserker" << endl;
-  }
-  else if (unit == 8)
-  {
-    cout << "Class: Shielder" << endl;
-  }
-  else if (unit == 9)
-  {
-    cout << "Class: Ruler" << endl;
-  }
-  else if (unit == 10)
-  {
-    cout << "Class: Avenger" << endl;
-  }
-  else if (unit == 11)
-  {
-    cout << "Class: Moon Cancer" << endl;
-  }
-  else if (unit == 12)
-  {
-    cout << "Class: Alter Ego" << endl;
-  }
-  else
-  {
-    cout << "Class: Foreigner" << endl;
-  }
+  return (index - start);
 }
