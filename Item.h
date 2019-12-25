@@ -4,6 +4,9 @@
 class Item
 {
   public:
-    item(char*);
+    Item(char*);
     char* getName();
-}
+    char* itemName;
+  private:
+    char* name;
+};
