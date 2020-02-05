@@ -85,9 +85,6 @@ Room* createRooms(vector<Room*> &rooms, vector<Unit*> &units)
   Room* battle = new Room();
   battle->init("Battle Stage", "The battle screen");
   rooms.push_back(battle);
-  Room* title = new Room();
-  title->init("Title Screen", "The title screen");
-  rooms.push_back(title);
 
   Unit* hokusai = new Unit();
   hokusai->init("Katsushika Hokusai", "Best Girl");
