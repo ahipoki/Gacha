@@ -13,10 +13,9 @@ void search(vector<Unit*>*uListU);
 int main()
 {
     char input[80];
-    bool running = true;
     vector<Unit*> uList;
     vector<Unit*>*uListU = &uList;
-    while (running == true){
+    while (true){
         cout << "Do you want to fight, manage your box, or quit?" << endl;
         cin.getline(input, 80);
         strupper(input);
@@ -27,7 +26,7 @@ int main()
             box(uListU);
         }
         else if (strcmp(input, "QUIT") == 0){
-	  running = false;
+            return false;
         }
         else{
             cout << "That's an invalid option" << endl;
